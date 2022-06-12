@@ -35,7 +35,7 @@ createAutoComplete({
 
     onOptionSelect(movie) {
         document.querySelector('.tutorial').classList.add('is-hidden');
-        onMovieSelect(movie, document.querySelector('#left-summary'),'left');
+        onMovieSelect(movie, document.querySelector('#left-summary'), 'left');
     },
 });
 
@@ -46,7 +46,7 @@ createAutoComplete({
 
     onOptionSelect(movie) {
         document.querySelector('.tutorial').classList.add('is-hidden');
-        onMovieSelect(movie, document.querySelector('#right-summary'),'right');
+        onMovieSelect(movie, document.querySelector('#right-summary'), 'right');
     },
 });
 
@@ -62,18 +62,15 @@ const onMovieSelect = async (movie, summaryElement, side) => {
     });
 
     summaryElement.innerHTML = movieTemplate(response.data);
-    
-    if(side==='left')
-    {   
-        leftMovie=response.data;
+
+    if (side === 'left') {
+        leftMovie = response.data;
     }
-    else
-    {
-        rightMovie=response.data;
+    else {
+        rightMovie = response.data;
     }
 
-    if(leftMovie && rightMovie)
-    {
+    if (leftMovie && rightMovie) {
         runComparison();
     }
 };
@@ -83,18 +80,16 @@ const runComparison = () => {
     const leftSideStats = document.querySelectorAll('#left-summary .notification');
     const rightSideStats = document.querySelectorAll('#right-summary .notification');
 
-    leftSideStats.forEach((leftStat,index)=> {
+    leftSideStats.forEach((leftStat, index) => {
         const rightStat = rightSideStats[index];
         const leftSideValue = leftStat.dataset.value;
-        const rightSideValue = rightStat.dataset.value; 
+        const rightSideValue = rightStat.dataset.value;
 
-        if(rightSideValue > leftSideValue)
-        {
+        if (rightSideValue > leftSideValue) {
             leftStat.classList.remove('is-primary');
             leftStat.classList.add('is-warning');
         }
-        else
-        {
+        else {
             rightStat.classList.remove('is-primary');
             rightStat.classList.add('is-warning');
         }
@@ -105,16 +100,17 @@ const runComparison = () => {
 
 const movieTemplate = (movieDetail) => {
 
-    const dollars = parseInt(movieDetail.BoxOffice.replace(/\$/g,'').replace(/,/g, ''));
+    const dollars = parseInt(
+        movieDetail.BoxOffice.replace(/\$/g, '').replace(/,/g, '')
+    );
     const metascore = parseInt(movieDetail.Metascore);
     const imdbRating = parseFloat(movieDetail.imdbRating);
-    const imdbvotes = parseInt(movieDetail.imdbVotes.replace(/,/g,''));
-    let count = 0 ;
-    const awards = movieDetail.Awards.split(' ').forEach((word) =>{
+    const imdbVotes = parseInt(movieDetail.imdbVotes.replace(/,/g, ''));
+    let count = 0;
+    const awards = movieDetail.Awards.split(' ').forEach((word) => {
         const val = parseInt(word);
-        if(!isNaN(val))
-        {
-            count+=val;
+        if (!isNaN(val)) {
+            count += val;
         }
     });
     // console.log(count);
