@@ -88,15 +88,15 @@ const runComparison = () => {
         const leftSideValue = leftStat.dataset.value;
         const rightSideValue = rightStat.dataset.value; 
 
-        if(leftSideValue > rightSideValue)
-        {
-            rightStat.classList.remove('is-primary');
-            rightStat.classList.add('is-warning');
-        }
-        else
+        if(rightSideValue > leftSideValue)
         {
             leftStat.classList.remove('is-primary');
             leftStat.classList.add('is-warning');
+        }
+        else
+        {
+            rightStat.classList.remove('is-primary');
+            rightStat.classList.add('is-warning');
         }
     });
 };
