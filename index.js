@@ -13,7 +13,7 @@ const autoCompleteConfig = {    // Reusable
     },
 
     async fetchData(searchItem) {
-        const response = await axios.get('http://www.omdbapi.com/', {
+        const response = await axios.get('https://www.omdbapi.com/', {
             params: {
                 apikey: '8115193f',
                 s: searchItem
